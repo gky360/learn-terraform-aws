@@ -1,4 +1,10 @@
 terraform {
+  backend "remote" {
+    organization = "gky360"
+    workspaces {
+      name = "learn-terraform-aws"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
