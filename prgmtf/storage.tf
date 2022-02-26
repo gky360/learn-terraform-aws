@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "private" {
-  bucket = "pfn-yinagaki-prgmtf-private-pragmatic-terraform"
+  bucket = "gky360-prgmtf-private-pragmatic-terraform"
 
   versioning {
     enabled = true
@@ -23,7 +23,7 @@ resource "aws_s3_bucket_public_access_block" "private" {
 }
 
 resource "aws_s3_bucket" "public" {
-  bucket = "pfn-yinagaki-prgmtf-public-pragmatic-terraform"
+  bucket = "gky360-prgmtf-public-pragmatic-terraform"
   acl    = "public-read"
 
   cors_rule {
@@ -35,7 +35,7 @@ resource "aws_s3_bucket" "public" {
 }
 
 resource "aws_s3_bucket" "alb_log" {
-  bucket = "pfn-yinagaki-prgmtf-alb-log-pragmatic-terraform"
+  bucket = "gky360-prgmtf-alb-log-pragmatic-terraform"
 
   lifecycle_rule {
     enabled = true
