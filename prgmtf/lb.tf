@@ -11,8 +11,8 @@ resource "aws_lb" "example" {
   ]
 
   access_logs {
-    bucket     = aws_s3_bucket.alb_log.id
-    enaenabled = true
+    bucket  = aws_s3_bucket.alb_log.id
+    enabled = true
   }
 
   security_groups = [
@@ -45,7 +45,7 @@ module "https_sg" {
 module "http_redirect_sg" {
   source      = "./security_group"
   name        = "http-redirect-sg"
-  vpc_id      = aws_vpc.exmaple.id
+  vpc_id      = aws_vpc.example.id
   port        = 8080
   cidr_blocks = ["0.0.0.0/0"]
 }
