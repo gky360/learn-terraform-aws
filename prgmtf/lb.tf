@@ -97,9 +97,9 @@ resource "aws_acm_certificate" "example" {
 }
 
 resource "aws_route53_record" "example_certificate" {
-  name    = aws_acm_certificate.example.domain_validation_options[0].resource_record_name
-  type    = aws_acm_certificate.example.domain_validation_options[0].resource_record_type
-  records = [aws_acm_certificate.example.domain_validation_options[0].resource_record_value]
+  name    = one(aws_acm_certificate.example.domain_validation_options).resource_record_name
+  type    = one(aws_acm_certificate.example.domain_validation_options).resource_record_type
+  records = [one(aws_acm_certificate.example.domain_validation_options).resource_record_value]
   zone_id = aws_route53_zone.example.id
   ttl     = 60
 }
@@ -120,9 +120,9 @@ resource "aws_lb_listener" "https" {
     type = "fixed-response"
 
     fixed_response {
-      concontent_type = "text/plain"
-      message_body    = "これは『HTTPS』です"
-      status_code     = "200"
+      content_type = "text/plain"
+      message_body = "これは『HTTPS』です"
+      status_code  = "200"
     }
   }
 }
@@ -175,7 +175,8 @@ resource "aws_lb_listener_rule" "example" {
   }
 
   condition {
-    fixed  = "path-pattern"
-    values = ["/*"]
+    path_pattern {
+      values = ["/*"]
+    }
   }
 }

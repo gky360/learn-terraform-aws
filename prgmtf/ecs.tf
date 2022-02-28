@@ -22,10 +22,10 @@ resource "aws_ecs_service" "example" {
   health_check_grace_period_seconds = 60
 
   network_configuration {
-    assignassign_public_ip = false
-    security_groups        = [module.nginx_sg.security_group_id]
+    assign_public_ip = false
+    security_groups  = [module.nginx_sg.security_group_id]
 
-    subsubnets = [
+    subnets = [
       aws_subnet.private_0.id,
       aws_subnet.private_1.id,
     ]
@@ -52,7 +52,7 @@ module "nginx_sg" {
 
 resource "aws_cloudwatch_log_group" "for_ecs" {
   name              = "/ecs/example"
-  retention_in_days = 100
+  retention_in_days = 120
 }
 
 data "aws_iam_policy" "ecs_task_execution_role_policy" {
@@ -123,8 +123,8 @@ resource "aws_cloudwatch_event_target" "example_batch" {
     task_definition_arn = aws_ecs_task_definition.example_batch.arn
 
     network_configuration {
-      assignassign_public_ip = "false"
-      subnets                = [aws_subnet.private_0.id]
+      assign_public_ip = "false"
+      subnets          = [aws_subnet.private_0.id]
     }
   }
 }
